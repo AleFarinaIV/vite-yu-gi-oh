@@ -14,7 +14,7 @@
             this.getCardsList()
         },
         methods: {
-          getCharactersList() {
+          getCardsList() {
             axios.get(store.apiUrl).then((result) => {
               store.cardsList = result.data.data
             })
