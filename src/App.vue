@@ -1,12 +1,46 @@
-<script setup>
+<script>
+    import {store} from "./store.js"
+    import axios from 'axios'
 
+    import AppHeader from "./components/AppHeader.vue"
+    import AppMain from "./components/AppMain.vue"
+
+    export default {
+        components: {
+            AppHeader,
+            AppMain,
+        },
+        created() {
+            this.getCharactersList()
+        },
+        methods: {
+          getCharactersList() {
+            axios.get(store.apiUrl).then((result) => {
+              store.cardsList = result.data.data
+            })
+          }
+        },
+        data() {
+          return {
+            store,
+          }
+        }
+    }
 </script>
 
 <template>
 
+    <header>
+        <AppHeader />
+    </header>
+
+    <main>
+        <AppMain />
+    </main>
 
 </template>
 
-<style scoped>
+<style>
+@import "./styles/generals.scss"
 
 </style>
