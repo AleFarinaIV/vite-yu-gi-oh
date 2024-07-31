@@ -1,6 +1,11 @@
 <script>
+import { store } from "../store.js"
 export default {
-
+    data() {
+        return {
+            store,
+        }
+    }
 }
 
 </script>
@@ -12,11 +17,11 @@ export default {
         </div>
         <div id="cards_container" class="container pe-0">
             <div class="row justify-content-between">
-                <div class="content"></div>
-                <div class="content"></div>
-                <div class="content"></div>
-                <div class="content"></div>
-                <div class="content"></div>
+                <div class="content p-0" v-for="card in store.cardsList" :key="card.id">
+                    <img v-for="image, index in card.card_images" :key="`img-${index}`" :src="image.image_url" alt="">
+                    <h5>{{ card.name }}</h5>
+                    <p>{{ card.race }}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -25,7 +30,6 @@ export default {
 <style scoped>
     .size {
         width: 1200px;
-        height: 1000px;
         margin: 0 auto;
         padding: 45px;
         background-color: white;
@@ -46,10 +50,18 @@ export default {
             .row {
                 
                 .content {
-                    border: 1px solid black;
+                    text-align: center;
+                    background-color: orange;
                     width: 200px;
-                    height: 375px;
                     margin-bottom: 20px;
+                    img {
+                        width: 200px;
+                        object-fit: cover;
+                    }
+                    h5 {
+                        margin-top: 10px;
+                        color: white;
+                    }
                 }
 
                 &:last-child {
