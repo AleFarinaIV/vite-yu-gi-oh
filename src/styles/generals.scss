@@ -1,1 +1,16 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 60px;
+}
+
+main {
+    background-color: orange;
+    min-height: calc(100vh - 60px);
+}

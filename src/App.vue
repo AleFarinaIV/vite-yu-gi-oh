@@ -11,7 +11,7 @@
             AppMain,
         },
         created() {
-            this.getCharactersList()
+            this.getCardsList()
         },
         methods: {
           getCharactersList() {
