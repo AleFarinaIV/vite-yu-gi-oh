@@ -6,12 +6,7 @@
     padding: 0;
 }
 
-header {
-    height: 60px;
-}
-
 main {
     background-color: orange;
-    min-height: calc(100vh - 60px);
-    padding: 85px 0;
+    padding: 30px 0;
 }

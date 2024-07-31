@@ -15,6 +15,23 @@ export default {
 </script>
 
 <template>
+    
+    <div class="select_container">
+        <div class="select_div">
+            <select class="select_form" aria-label="Default select example">
+                <option selected>Seleziona un type</option>
+                <option value="1">Aqua</option>
+                <option value="2">Beast</option>
+                <option value="3">Continuous</option>
+                <option value="4">Equip</option>
+                <option value="5">Fish</option>
+                <option value="6">Insect</option>
+                <option value="7">Normal</option>
+                <option value="8">Quick-Play</option>
+            </select>
+        </div>
+    </div>
+
     <div class="size">
         <div class="bg_black">
             <p>Found {{ store.cardsList.length }} cards</p>
@@ -25,9 +42,32 @@ export default {
             </div>
         </div>
     </div>
+
 </template>
 
 <style scoped>
+
+    .select_container {
+        width: 1200px;
+        margin: 0 auto;
+        .select_div {
+            width: 200px;
+            margin-left: 15px;
+            margin-bottom: 30px;
+            .select_form {
+                width: 100%;
+                padding: 5px;
+                border-radius: 5px;
+                border: none;
+                background-color: white;
+                color: black;
+                cursor: pointer;
+            }
+        }
+
+        
+    }
+
     .size {
         width: 1200px;
         margin: 0 auto;
