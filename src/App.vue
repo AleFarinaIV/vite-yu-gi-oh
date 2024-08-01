@@ -1,33 +1,49 @@
 <script>
-    import {store} from "./store.js"
-    import axios from 'axios'
+  import {store} from "./store.js"
+  import axios from 'axios'
+  import AppHeader from "./components/AppHeader.vue"
+  import AppMain from "./components/AppMain.vue"
 
-    import AppHeader from "./components/AppHeader.vue"
-    import AppMain from "./components/AppMain.vue"
+  export default {
+    components: {
+      AppHeader,
+      AppMain,
+    },
 
-    export default {
-        components: {
-            AppHeader,
-            AppMain,
-        },
-        created() {
-            this.getCardsList()
-        },
-        methods: {
-          getCardsList() {
-            axios.get(`${store.apiUrl}${store.apiCard}`).then((result) => {
-              store.cardsList = result.data.data
-              console.log(store.cardsList)
-              store.loading = false
-            })
-          }
-        },
-        data() {
-          return {
-            store,
-          }
-        }
-    }
+    created() {
+      this.getCardsList();
+      this.getArchetypeList();
+    },
+
+    methods: {
+      getCardsList() {
+        let selectArchetype = `${store.apiUrl}${store.apiCard}`;
+        
+        if(store.cardArchetype !== "") {
+          selectArchetype += `&archetype=${store.cardArchetype}`
+        };
+
+        axios.get(selectArchetype).then((result) => {
+          store.cardsList = result.data.data
+          store.loading = false;
+        })
+      },
+
+      getArchetypeList() {
+        axios.get(`${store.apiUrl}${store.apiArchetypeUrl}`).then((result) => {
+          store.archetypeList = result.data
+          console.log(store.archetypeList)
+          store.loading = false;
+        })
+      },
+    },
+
+    data() {
+      return {
+        store,
+      }
+    },
+  }
 </script>
 
 <template>
@@ -37,7 +53,7 @@
     </header>
 
     <main>
-        <AppMain />
+        <AppMain @filter="getCardsList"/>
     </main>
 
 </template>

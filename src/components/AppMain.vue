@@ -2,28 +2,22 @@
 import { store } from "../store.js"
 import CardSection from "./CardSection.vue"
 import AppLoader from "./AppLoader.vue"
-import axios from 'axios'
+
 export default {
     components: {
         CardSection,
         AppLoader
     },
-    created() {
-        this.getArchetype()
-    },
     methods: {
-        getArchetype() {
-            axios.get(`${store.apiUrl}${store.apiArchetypeUrl}`).then((result) => {
-                store.archetypeList = result.data.slice(0, 10)
-                console.log(store.archetypeList)
-            })
+        selectArchetype() {
+            this.$emit('filter')
         }
     },
     data() {
         return {
             store,
         }
-    }
+    },
 }
 
 </script>
@@ -32,7 +26,7 @@ export default {
     
     <div class="select_container">
         <div class="select_div">
-            <select class="select_form" aria-label="Default select example" v-model="store.cardArchetype">
+            <select class="select_form" aria-label="Default select example" v-model="store.cardArchetype" @change="selectArchetype">
                 <option v-for="archetype, i in store.archetypeList" :key="`${i}`"
                 :value="archetype.archetype_name">{{ archetype.archetype_name }}</option>
             </select>
@@ -45,7 +39,7 @@ export default {
         </div>
         <div id="cards_container" class="container pe-0">
             <AppLoader v-if="store.loading" />
-            <div class="row justify-content-between me-0" v-else>
+            <div class="row justify-content-around" v-else>
                 <CardSection v-for="section in store.cardsList" :key="section.id" :card_section="section"/>
             </div>
         </div>
