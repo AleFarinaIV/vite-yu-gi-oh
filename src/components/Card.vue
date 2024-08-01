@@ -14,7 +14,7 @@ export default {
 
     <img :src="image.image_url" alt="">
     <h5>{{ card.name }}</h5>
-    <p>{{ card.race }}</p>
+    <p>{{ card.archetype }}</p>
 
 </template>
 

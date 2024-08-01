@@ -2,10 +2,22 @@
 import { store } from "../store.js"
 import CardSection from "./CardSection.vue"
 import AppLoader from "./AppLoader.vue"
+import axios from 'axios'
 export default {
     components: {
         CardSection,
         AppLoader
+    },
+    created() {
+        this.getArchetype()
+    },
+    methods: {
+        getArchetype() {
+            axios.get(`${store.apiUrl}${store.apiArchetypeUrl}`).then((result) => {
+                store.archetypeList = result.data.slice(0, 10)
+                console.log(store.archetypeList)
+            })
+        }
     },
     data() {
         return {
@@ -20,16 +32,9 @@ export default {
     
     <div class="select_container">
         <div class="select_div">
-            <select class="select_form" aria-label="Default select example">
-                <option selected>Seleziona un type</option>
-                <option value="1">Aqua</option>
-                <option value="2">Beast</option>
-                <option value="3">Continuous</option>
-                <option value="4">Equip</option>
-                <option value="5">Fish</option>
-                <option value="6">Insect</option>
-                <option value="7">Normal</option>
-                <option value="8">Quick-Play</option>
+            <select class="select_form" aria-label="Default select example" v-model="store.cardArchetype">
+                <option v-for="archetype, i in store.archetypeList" :key="`${i}`"
+                :value="archetype.archetype_name">{{ archetype.archetype_name }}</option>
             </select>
         </div>
     </div>

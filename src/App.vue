@@ -15,7 +15,7 @@
         },
         methods: {
           getCardsList() {
-            axios.get(store.apiUrl).then((result) => {
+            axios.get(`${store.apiUrl}${store.apiCard}`).then((result) => {
               store.cardsList = result.data.data
               console.log(store.cardsList)
               store.loading = false

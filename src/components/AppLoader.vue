@@ -6,7 +6,7 @@ export default {
 
 <template>
     <div class="container text-center">
-        <P>LOADING...</P>
+        <p>LOADING...</p>
     </div>
 </template>
 
