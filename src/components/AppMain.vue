@@ -1,9 +1,11 @@
 <script>
 import { store } from "../store.js"
 import CardSection from "./CardSection.vue"
+import AppLoader from "./AppLoader.vue"
 export default {
     components: {
         CardSection,
+        AppLoader
     },
     data() {
         return {
@@ -37,7 +39,8 @@ export default {
             <p>Found {{ store.cardsList.length }} cards</p>
         </div>
         <div id="cards_container" class="container pe-0">
-            <div class="row justify-content-between me-0">
+            <AppLoader v-if="store.loading" />
+            <div class="row justify-content-between me-0" v-else>
                 <CardSection v-for="section in store.cardsList" :key="section.id" :card_section="section"/>
             </div>
         </div>
@@ -64,7 +67,6 @@ export default {
                 cursor: pointer;
             }
         }
-
         
     }
 
