@@ -24,24 +24,32 @@ export default {
 
 <template>
     
-    <div class="select_container">
-        <div class="select_div">
-            <select class="select_form" aria-label="Default select example" v-model="store.cardArchetype" @change="selectArchetype">
-                <option value="Select an archetype">Select an archetype</option>
-                <option value="No archetype">No archetype</option>
-                <option v-for="archetype, i in store.archetypeList" :key="`${i}`"
-                :value="archetype.archetype_name">{{ archetype.archetype_name }}</option>
-            </select>
+    <div id="select_container" class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="select_div">
+                    <select class="select_form" aria-label="Default select example" v-model="store.cardArchetype" @change="selectArchetype">
+                        <option value="Select an archetype">Select an archetype</option>
+                        <option value="No archetype">No archetype</option>
+                        <option v-for="archetype, i in store.archetypeList" :key="`${i}`"
+                        :value="archetype.archetype_name">{{ archetype.archetype_name }}</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="size">
-        <div class="bg_black">
-            <p>Found {{ store.cardsList.length }} cards</p>
+    <div id="size" class="container p-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="bg_black">
+                    <p>Found {{ store.cardsList.length }} cards</p>
+                </div>
+            </div>
         </div>
-        <div id="cards_container" class="container p-0">
+        <div id="cards_container" class="col-12">
             <AppLoader v-if="store.loading" />
-            <div class="row justify-content-around " v-else>
+            <div id="my_row" class="row row-cols-5" v-else>
                 <CardSection v-for="section in store.cardsList" :key="section.id" 
                 :card_section="section"/>
             </div>
@@ -52,9 +60,8 @@ export default {
 
 <style scoped>
 
-    .select_container {
-        width: 1200px;
-        margin: 0 auto;
+    #select_container {
+
         .select_div {
             width: 200px;
             margin-left: 15px;
@@ -72,10 +79,7 @@ export default {
         
     }
 
-    .size {
-        width: 1200px;
-        margin: 0 auto;
-        padding: 45px;
+    #size {
         background-color: white;
 
         .bg_black {
@@ -88,8 +92,8 @@ export default {
             }
         }
         
-        #cards_container {
-            margin: 0 auto;
+        #my_row:first-child {
+            min-height: 400px;
         }
     }
 </style>

@@ -6,7 +6,7 @@ export default {
 </script>
 
 <template>
-
+    
     <div class="d-flex align-items-center p-2">
         <div class="size">
             <img src="../assets/1200px-Yu-Gi-Oh!_(Logo).jpg" alt="">
