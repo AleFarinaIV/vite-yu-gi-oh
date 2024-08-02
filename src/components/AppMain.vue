@@ -15,7 +15,7 @@ export default {
     },
     data() {
         return {
-            store,
+            store
         }
     },
 }
@@ -27,6 +27,8 @@ export default {
     <div class="select_container">
         <div class="select_div">
             <select class="select_form" aria-label="Default select example" v-model="store.cardArchetype" @change="selectArchetype">
+                <option value="Select an archetype">Select an archetype</option>
+                <option value="No archetype">No archetype</option>
                 <option v-for="archetype, i in store.archetypeList" :key="`${i}`"
                 :value="archetype.archetype_name">{{ archetype.archetype_name }}</option>
             </select>
@@ -37,10 +39,11 @@ export default {
         <div class="bg_black">
             <p>Found {{ store.cardsList.length }} cards</p>
         </div>
-        <div id="cards_container" class="container pe-0">
+        <div id="cards_container" class="container p-0">
             <AppLoader v-if="store.loading" />
-            <div class="row justify-content-around" v-else>
-                <CardSection v-for="section in store.cardsList" :key="section.id" :card_section="section"/>
+            <div class="row justify-content-around " v-else>
+                <CardSection v-for="section in store.cardsList" :key="section.id" 
+                :card_section="section"/>
             </div>
         </div>
     </div>

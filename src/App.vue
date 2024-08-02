@@ -17,16 +17,29 @@
 
     methods: {
       getCardsList() {
-        let selectArchetype = `${store.apiUrl}${store.apiCard}`;
+        let cardUrl = `${store.apiUrl}${store.apiCard}`;
         
-        if(store.cardArchetype !== "") {
-          selectArchetype += `&archetype=${store.cardArchetype}`
-        };
+        if (store.cardArchetype && store.cardArchetype !== "Select an archetype" && store.cardArchetype !== "No archetype") {
+          cardUrl += `&archetype=${store.cardArchetype}`;
+        }
 
-        axios.get(selectArchetype).then((result) => {
-          store.cardsList = result.data.data
+        axios.get(cardUrl).then((result) => {
+          let cards = result.data.data;
+          store.cardsList = cards;
+
+          if (store.cardArchetype === "No archetype") {
+            cards = cards.filter(card => !card.archetype)
+            store.cardsList = cards;
+          }
+          console.log(store.cardsList)
           store.loading = false;
         })
+        .catch((error) => {
+          console.error("Error fetching cards list:", error);
+        })
+        .finally(() => {
+          store.loading = false;
+        });
       },
 
       getArchetypeList() {
